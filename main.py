@@ -15,7 +15,7 @@ from src.model_training import ModelTraining
 logging.basicConfig(level=logging.INFO)
 
 
-@ignore_warnings(category=Warning)
+@ignore_warnings(category=Warning) # type: ignore
 def main():
 
     # Configuration file path
