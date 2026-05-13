@@ -1,5 +1,6 @@
 # Standard library imports
 import logging
+from math import sqrt
 from typing import Any, Dict, Tuple
 
 # Related third-party imports
@@ -10,7 +11,6 @@ from sklearn.metrics import (
     mean_absolute_error,
     mean_squared_error,
     r2_score,
-    root_mean_squared_error,
 )
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
@@ -177,8 +177,8 @@ class ModelTraining:
         metrics = {
             "MAE": mean_absolute_error(y_test, y_test_pred),
             "MSE": mean_squared_error(y_test, y_test_pred),
-            "RMSE": mean_squared_error(y_test, y_test_pred, squared=False),
-            "R²": r2_score(y_test, y_test_pred),
+            "RMSE": sqrt(mean_squared_error(y_test, y_test_pred)),
+            "R2": r2_score(y_test, y_test_pred),
         }
         logging.info(f"Final Test Metrics for {model_name}:")
         for metric_name, metric_value in metrics.items():
@@ -206,8 +206,8 @@ class ModelTraining:
         metrics = {
             "MAE": mean_absolute_error(y_val, y_val_pred),
             "MSE": mean_squared_error(y_val, y_val_pred),
-            "RMSE": mean_squared_error(y_val, y_val_pred, squared=False),
-            "R²": r2_score(y_val, y_val_pred),
+            "RMSE": sqrt(mean_squared_error(y_val, y_val_pred)),
+            "R2": r2_score(y_val, y_val_pred),
         }
         logging.info(f"{model_name} Validation Metrics:")
         for metric_name, metric_value in metrics.items():
